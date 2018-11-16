@@ -1,0 +1,46 @@
+<ion-header>
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>
+        Printer DATAECS
+      </ion-title>
+      <ion-buttons end>  
+        <button  ion-button icon-only (click)="settings()" [disabled]="!selectedPrinter">
+          <ion-icon name="settings"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content padding>
+  
+    <ion-card>
+      <ion-item *ngIf="selectedPrinter">
+        <ion-avatar item-end>
+          <ion-icon name="power" class="off" *ngIf="!isConnected" (click)="connectPrinter()"></ion-icon>
+          <ion-icon name="power" class="on" *ngIf="isConnected" (click)="disconnectPrinter()"></ion-icon>
+        </ion-avatar>
+        <h1 *ngIf="selectedPrinter">
+            <ion-icon name="print"></ion-icon>
+          {{ selectedPrinter.name }}
+        </h1>
+      </ion-item>
+      
+      <button ion-button block (click)="list()" *ngIf="!selectedPrinter">
+        Select a Printer
+      </button>
+    </ion-card>
+  
+    <ion-card>
+      <button ion-button block (tap)="testText()" [disabled]="!selectedPrinter">
+        Test Print Text
+      </button>
+      <button ion-button block (tap)="testBarcode()" [disabled]="!selectedPrinter">
+        Test Print Barcode
+      </button>
+    </ion-card>
+  
+  </ion-content>
+  

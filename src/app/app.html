@@ -1,1 +1,27 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<ion-menu persistent="true" side="left" [content]="content">
+  <ion-header>
+    <ion-item>
+      BT Printer Tester
+    </ion-item>
+  </ion-header>
+
+
+  <ion-content scroll="false">
+    <ion-list>
+      <button ion-item full menuClose (click)="gotoPage('HomePage')">
+        <ion-icon name="search" color="secondary-dark"></ion-icon>
+        <span class="menuText">BluetoothSerial</span>
+      </button>
+      <button ion-item menuClose (click)="gotoPage('DatecsPage')">
+        <ion-icon name="logo-usd" color="secondary-dark"></ion-icon>
+        <span class="menuText">Datecs</span>
+      </button>
+    </ion-list>
+  </ion-content>
+
+  
+</ion-menu>
+  
+ <ion-nav [root]="rootPage" #content></ion-nav>
+
+

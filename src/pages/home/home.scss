@@ -1,3 +1,12 @@
 page-home {
-
+	.off {
+		color: color($colors, danger);
+		font-size: 2em;
+		font-weight: bold;
+	}
+	.on {
+		color: color($colors, active);
+		font-size: 2em;
+		font-weight: bold;
+	}
 }

@@ -6,8 +6,9 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 
-import { PrintProvider } from './services/printer-service';
+import { PrintService } from './services/printer-service';
 import { BluetoothSerial } from '@ionic-native/bluetooth-serial';
+import { PrinterDATAECSService } from './services/printer-datecs-service';
 
 @NgModule({
 	declarations: [ MyApp ],
@@ -19,7 +20,8 @@ import { BluetoothSerial } from '@ionic-native/bluetooth-serial';
 		BluetoothSerial,
 		SplashScreen,
 		{ provide: ErrorHandler, useClass: IonicErrorHandler },
-		PrintProvider
+		PrintService,
+		PrinterDATAECSService
 	]
 })
 export class AppModule {}
