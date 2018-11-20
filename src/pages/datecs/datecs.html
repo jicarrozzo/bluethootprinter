@@ -56,7 +56,7 @@
     </ion-card>
   
 
-    <ngx-qrcode *ngFor="let ticket of ticketList.list" [id]="ticket.ticket" qrc-element-type="canvas" [qrc-value]="ticket.ticket" [hidden]="true" ></ngx-qrcode>
+    <ngx-qrcode *ngFor="let ticket of ticketList?.list" [id]="ticket.ticket" qrc-element-type="canvas" [qrc-value]="ticket.ticket" [hidden]="true" ></ngx-qrcode>
 
   </ion-content>
   

@@ -21,9 +21,7 @@ export class DatecsPage {
 		public navCtrl: NavController,
 		private printProvider: PrinterDATAECSService,
 		private modalCtrl: ModalController
-	) {
-		this.ticketList = new TestTickets();
-	}
+	) {}
 
 	list() {
 		this.printProvider
@@ -176,13 +174,9 @@ export class DatecsPage {
 	}
 
 	testTicketList() {
-		let promises_array: Array<any> = [];
+		this.ticketList = new TestTickets();
 
 		this.ticketList.list.forEach((t: Ticket) => {
-			// prepare QE
-
-			// Text
-
 			const receipt =
 				commands.HARDWARE.HW_INIT +
 				`{center}{w}My Brand Company{/w}{br}` +
@@ -211,14 +205,6 @@ export class DatecsPage {
 				`{/w}{br}`;
 
 			// QRCode
-			promises_array.push(this.prepareCanvas(receipt, t));
-		});
-
-		Promise.all(promises_array);
-	}
-
-	prepareCanvas(receipt: string, t: Ticket) {
-		return new Promise((resolve, reject) => {
 			setTimeout(() => {
 				// Pickup QR
 				// let qrCanvas = document.querySelector('canvas');
@@ -234,14 +220,42 @@ export class DatecsPage {
 					})
 					.then(() => {
 						console.log('qr image printing OK');
-						this.printProvider.write(commands.EOL + commands.HORIZONTAL_LINE.HR_58MM + commands.EOL + commands.EOL);
-						resolve();
+						return this.printProvider.write(
+							commands.EOL + commands.HORIZONTAL_LINE.HR_58MM + commands.EOL + commands.EOL
+						);
 					})
 					.catch((err) => {
 						console.log(err);
-						reject(err);
 					});
 			}, 500);
 		});
 	}
+
+	// prepareCanvas(receipt: string, t: Ticket) {
+	// 	return new Promise((resolve, reject) => {
+	// 		setTimeout(() => {
+	// 			// Pickup QR
+	// 			// let qrCanvas = document.querySelector('canvas');
+	// 			let qrCanvas = document.getElementById(t.ticket).getElementsByTagName('canvas')[0];
+	// 			let qrCanvasUrl = qrCanvas.toDataURL('image/png').replace(/^data:image\/(png|jpg|jpeg);base64,/, '');
+
+	// 			this.printProvider
+	// 				.printText(receipt)
+	// 				.then(() => {
+	// 					console.log('text printing OK');
+
+	// 					return this.printProvider.printImage(qrCanvasUrl, qrCanvas.width, qrCanvas.height, 1);
+	// 				})
+	// 				.then(() => {
+	// 					console.log('qr image printing OK');
+	// 					this.printProvider.write(commands.EOL + commands.HORIZONTAL_LINE.HR_58MM + commands.EOL + commands.EOL);
+	// 					resolve();
+	// 				})
+	// 				.catch((err) => {
+	// 					console.log(err);
+	// 					reject(err);
+	// 				});
+	// 		}, 500);
+	// 	});
+	// }
 }
