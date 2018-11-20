@@ -1,3 +1,6 @@
+/// Implements : cordova-plugin-bluetooth-serial
+/// https://ionicframework.com/docs/native/bluetooth-serial/
+
 import { Injectable } from '@angular/core';
 import { AlertController } from 'ionic-angular';
 import { BluetoothSerial } from '@ionic-native/bluetooth-serial';

@@ -1,8 +1,8 @@
 export class Printer {
-	public id: string;
+	public aliasName: string;
 	public address: string;
 	public name: string;
-	public class: string;
+	public type: string;
 
 	constructor() {}
 }

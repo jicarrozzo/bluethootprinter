@@ -1,3 +1,6 @@
+/// Implements: cordova-plugin-datecs-printer
+/// url: https://github.com/giorgiofellipe/cordova-plugin-datecs-printer
+
 import { Injectable } from '@angular/core';
 
 declare let DatecsPrinter: any;
@@ -7,11 +10,14 @@ declare var window: any;
 export class PrinterDATAECSService {
 	public listBluetoothDevices() {
 		return new Promise((resolve, reject) => {
-			window.DatecsPrinter.listBluetoothDevices(
+			DatecsPrinter.listBluetoothDevices(
 				function(success) {
+					console.log('ando?');
+
 					resolve(success);
 				},
 				function(error) {
+					console.log('error');
 					reject(error);
 				}
 			);
@@ -107,21 +113,35 @@ export class PrinterDATAECSService {
 		});
 	}
 
-	public printQRCode() {
+	public printQRCode(size, eccLv, data) {
 		return new Promise((resolve, reject) => {
-			DatecsPrinter.setBarcode(1, false, 2, 0, 100);
 			DatecsPrinter.printQRCode(
-				4, // qr code size
-				2, // qr code error correction
-				'http://www.datecs.bg', // barcode data
-				function() {
-					resolve('success!');
+				size,
+				eccLv,
+				data,
+				function(success) {
+					resolve(success);
 				},
-				function(err) {
-					reject(err);
+				function(error) {
+					reject(error);
 				}
 			);
 		});
+
+		// return new Promise((resolve, reject) => {
+		// 	DatecsPrinter.setBarcode(1, false, 2, 0, 100);
+		// 	DatecsPrinter.printQRCode(
+		// 		4, // qr code size
+		// 		2, // qr code error correction
+		// 		'http://www.datecs.bg', // barcode data
+		// 		function() {
+		// 			resolve('success!');
+		// 		},
+		// 		function(err) {
+		// 			reject(err);
+		// 		}
+		// 	);
+		// });
 	}
 
 	public printSelfTest() {

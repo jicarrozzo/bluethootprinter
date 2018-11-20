@@ -19,8 +19,8 @@
     <ion-card>
       <ion-item *ngIf="selectedPrinter">
         <ion-avatar item-end>
-          <ion-icon name="power" class="off" *ngIf="!isConnected" (click)="connectPrinter()"></ion-icon>
-          <ion-icon name="power" class="on" *ngIf="isConnected" (click)="disconnectPrinter()"></ion-icon>
+          <!-- <ion-icon name="power" class="off" *ngIf="!isConnected" (click)="connectPrinter()"></ion-icon> -->
+          <ion-icon name="power" class="on" (click)="disconnectPrinter()"></ion-icon>
         </ion-avatar>
         <h1 *ngIf="selectedPrinter">
             <ion-icon name="print"></ion-icon>
@@ -33,14 +33,30 @@
       </button>
     </ion-card>
   
-    <ion-card>
+    <ion-card> 
+      <ion-item>
+        <ion-label stacked>Text to print</ion-label>
+        <ion-input type="text" [(ngModel)]="textToPrint"></ion-input>
+      </ion-item>
       <button ion-button block (tap)="testText()" [disabled]="!selectedPrinter">
         Test Print Text
       </button>
       <button ion-button block (tap)="testBarcode()" [disabled]="!selectedPrinter">
         Test Print Barcode
       </button>
+      <button ion-button block (tap)="testQRcode()" [disabled]="!selectedPrinter">
+        Test Print QR
+      </button>
+      <button ion-button block (tap)="testImage()" [disabled]="!selectedPrinter">
+        Test Print Image
+      </button>
+      <button ion-button block (tap)="testTicketList()" [disabled]="!selectedPrinter">
+          Test Print Tickets
+        </button>
     </ion-card>
   
+
+    <ngx-qrcode *ngFor="let ticket of ticketList.list" [id]="ticket.ticket" qrc-element-type="canvas" [qrc-value]="ticket.ticket" [hidden]="true" ></ngx-qrcode>
+
   </ion-content>
   
